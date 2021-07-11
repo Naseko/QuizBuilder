@@ -1,0 +1,2 @@
+2021-07-11 19:57:32 ERROR AdminAPIController:93 - org.springframework.orm.jpa.JpaObjectRetrievalFailureException: Unable to find ru.agaf.QuizBuilder.jpa.model.Question with id 5; nested exception is javax.persistence.EntityNotFoundException: Unable to find ru.agaf.QuizBuilder.jpa.model.Question with id 5
+2021-07-11 20:04:43 ERROR AdminAPIController:93 - javax.persistence.EntityNotFoundException: Unable to find ru.agaf.QuizBuilder.jpa.model.Quiz with id 4
