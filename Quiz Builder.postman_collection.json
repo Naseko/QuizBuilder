@@ -327,6 +327,50 @@
 			"response": []
 		},
 		{
+			"name": "Add answer",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"qtext\": \"Maven in C#?\",\r\n    \"type\": \"text\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/adminui/question/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"adminui",
+						"question",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "ADMIN: Update question",
 			"request": {
 				"auth": {
@@ -529,7 +573,7 @@
 			"response": []
 		},
 		{
-			"name": "TESTS: Load test data Copy",
+			"name": "Mock quiz taking",
 			"request": {
 				"auth": {
 					"type": "basic",

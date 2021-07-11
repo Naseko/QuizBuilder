@@ -7,11 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.agaf.QuizBuilder.jpa.model.Question;
 import ru.agaf.QuizBuilder.jpa.model.Quiz;
-import ru.agaf.QuizBuilder.jpa.repo.AnswerRepository;
 import ru.agaf.QuizBuilder.jpa.repo.QuestionRepository;
 import ru.agaf.QuizBuilder.jpa.repo.QuizRepository;
-import ru.agaf.QuizBuilder.jpa.repo.UserRepository;
-import ru.agaf.QuizBuilder.rest.controller.UtilController;
 
 import java.util.Optional;
 import java.util.Set;
@@ -23,16 +20,11 @@ public class AdminAPIController {
 
     private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
-    private final UserRepository userRepository;
-    private final AnswerRepository answerRepository;
 
     @Autowired
-    public AdminAPIController(QuizRepository quizRepository, QuestionRepository questionRepository,
-                              UserRepository userRepository, AnswerRepository answerRepository) {
+    public AdminAPIController(QuizRepository quizRepository, QuestionRepository questionRepository) {
         this.quizRepository = quizRepository;
         this.questionRepository = questionRepository;
-        this.userRepository = userRepository;
-        this.answerRepository = answerRepository;
     }
 
     @PostMapping("/quiz/create")

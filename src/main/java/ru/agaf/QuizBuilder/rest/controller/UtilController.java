@@ -73,9 +73,6 @@ public class UtilController {
 
             quizRepository.save(tickQuiz);
 
-            //
-
-            Quiz quizToPass = quizRepository.getById(1L);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e);

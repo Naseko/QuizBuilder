@@ -15,6 +15,15 @@ public class Answer {
 
     private String text;
 
+    public Answer(String text, Question question, User user) {
+        this.text = text;
+        this.question = question;
+        this.user = user;
+    }
+
+    public Answer() {
+    }
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "question_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

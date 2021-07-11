@@ -5,17 +5,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import ru.agaf.QuizBuilder.exception.ResourceNotFoundException;
 import ru.agaf.QuizBuilder.jpa.model.Answer;
 import ru.agaf.QuizBuilder.jpa.model.Question;
 import ru.agaf.QuizBuilder.jpa.model.Quiz;
+import ru.agaf.QuizBuilder.jpa.model.User;
 import ru.agaf.QuizBuilder.jpa.repo.AnswerRepository;
 import ru.agaf.QuizBuilder.jpa.repo.QuestionRepository;
 import ru.agaf.QuizBuilder.jpa.repo.QuizRepository;
 import ru.agaf.QuizBuilder.jpa.repo.UserRepository;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,16 +95,13 @@ public class UserAPIController {
         return new ResponseEntity<>(quizes, HttpStatus.OK);
     }
 
-    @GetMapping("/{questionId}/answers")
-    public Page<Answer> getAllAnswersByQuestionId(@PathVariable (value = "questionId") Long questionId, Pageable pageable) {
-        return answerRepository.findByQuestionId(questionId, pageable);
-    }
-
-    @PostMapping("/{questionId}/answers")
-    public Answer createAnswer(@PathVariable (value = "questionId") Long questionId, @Valid @RequestBody Answer answer) {
-        return questionRepository.findById(questionId).map(question -> {
-            answer.setQuestion(question);
-            return answerRepository.save(answer);
-        }).orElseThrow(() -> new ResourceNotFoundException("QuestionId " + questionId + " not found"));
+    @PostMapping("/answer/create")
+    public ResponseEntity<Void> create(@RequestBody Answer answer) {
+        try {
+            answerRepository.save(new Answer(answer.getText(),answer.getQuestion(),answer.getUser()));
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
